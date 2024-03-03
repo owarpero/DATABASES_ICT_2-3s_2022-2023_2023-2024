@@ -1,0 +1,773 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Healthcare Management System API",
+    "description" : "API for managing users, employees, specializations, schedules, appointments, and reviews in a healthcare system.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/HURSPASHA/oop/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "paths" : {
+    "/users/register" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Register a new user",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserRegistration"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "User created successfully"
+          }
+        }
+      }
+    },
+    "/users/login" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "User login",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/users_login_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Login successful"
+          }
+        }
+      }
+    },
+    "/users/{user_id}" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "Get user details",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User details retrieved successfully"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Users" ],
+        "summary" : "Update user details",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Users" ],
+        "summary" : "Delete a user",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "User deleted successfully"
+          }
+        }
+      }
+    },
+    "/specializations" : {
+      "get" : {
+        "tags" : [ "Specializations" ],
+        "summary" : "Get list of all specializations",
+        "responses" : {
+          "200" : {
+            "description" : "List of specializations retrieved successfully"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Specializations" ],
+        "summary" : "Create a new specialization",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Specialization"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Specialization created successfully"
+          }
+        }
+      }
+    },
+    "/specializations/{specialization_id}" : {
+      "put" : {
+        "tags" : [ "Specializations" ],
+        "summary" : "Update specialization information",
+        "parameters" : [ {
+          "name" : "specialization_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Specialization"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Specialization updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Specializations" ],
+        "summary" : "Delete a specialization",
+        "parameters" : [ {
+          "name" : "specialization_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Specialization deleted successfully"
+          }
+        }
+      }
+    },
+    "/employees" : {
+      "get" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Get list of all employees",
+        "responses" : {
+          "200" : {
+            "description" : "List of employees retrieved successfully"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Add a new employee (doctor)",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Employee added successfully"
+          }
+        }
+      }
+    },
+    "/employees/{employee_id}" : {
+      "get" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Get employee details",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Employee details retrieved successfully"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Update employee information",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Employee updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Delete an employee",
+        "parameters" : [ {
+          "name" : "employee_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Employee deleted successfully"
+          }
+        }
+      }
+    },
+    "/schedule" : {
+      "post" : {
+        "tags" : [ "Schedule" ],
+        "summary" : "Create a new schedule entry",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Schedule"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Schedule entry created successfully"
+          }
+        }
+      }
+    },
+    "/schedule/{doctor_id}" : {
+      "get" : {
+        "tags" : [ "Schedule" ],
+        "summary" : "Get schedule for a specific doctor",
+        "parameters" : [ {
+          "name" : "doctor_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Schedule retrieved successfully"
+          }
+        }
+      }
+    },
+    "/schedule/{schedule_id}" : {
+      "put" : {
+        "tags" : [ "Schedule" ],
+        "summary" : "Update a schedule entry",
+        "parameters" : [ {
+          "name" : "schedule_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Schedule"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Schedule entry updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Schedule" ],
+        "summary" : "Delete a schedule entry",
+        "parameters" : [ {
+          "name" : "schedule_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Schedule entry deleted successfully"
+          }
+        }
+      }
+    },
+    "/appointments" : {
+      "post" : {
+        "tags" : [ "Appointments" ],
+        "summary" : "Create a new appointment",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Appointment"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Appointment created successfully"
+          }
+        }
+      }
+    },
+    "/appointments/patient/{patient_id}" : {
+      "get" : {
+        "tags" : [ "Appointments" ],
+        "summary" : "Get list of appointments for a specific patient",
+        "parameters" : [ {
+          "name" : "patient_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Appointments list retrieved successfully"
+          }
+        }
+      }
+    },
+    "/appointments/{appointment_id}" : {
+      "put" : {
+        "tags" : [ "Appointments" ],
+        "summary" : "Update appointment information",
+        "parameters" : [ {
+          "name" : "appointment_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Appointment"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Appointment updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Appointments" ],
+        "summary" : "Cancel an appointment",
+        "parameters" : [ {
+          "name" : "appointment_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Appointment cancelled successfully"
+          }
+        }
+      }
+    },
+    "/reviews" : {
+      "post" : {
+        "tags" : [ "Reviews" ],
+        "summary" : "Add a new review",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Review"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Review added successfully"
+          }
+        }
+      }
+    },
+    "/reviews/{appointment_id}" : {
+      "get" : {
+        "tags" : [ "Reviews" ],
+        "summary" : "Get list of reviews for a specific appointment",
+        "parameters" : [ {
+          "name" : "appointment_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Reviews list retrieved successfully"
+          }
+        }
+      }
+    },
+    "/reviews/{review_id}" : {
+      "put" : {
+        "tags" : [ "Reviews" ],
+        "summary" : "Update a review",
+        "parameters" : [ {
+          "name" : "review_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Review"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Review updated successfully"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Reviews" ],
+        "summary" : "Delete a review",
+        "parameters" : [ {
+          "name" : "review_id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Review deleted successfully"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "UserRegistration" : {
+        "required" : [ "birthdate", "email", "name", "password", "phone", "surname" ],
+        "type" : "object",
+        "properties" : {
+          "user_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented user ID"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "surname" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string",
+            "description" : "Unique phone number"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "Unique email address"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "birthdate" : {
+            "type" : "string",
+            "description" : "Birthdate with time information",
+            "format" : "date-time"
+          }
+        }
+      },
+      "User" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/UserRegistration"
+        }, {
+          "required" : [ "role" ],
+          "type" : "object",
+          "properties" : {
+            "role" : {
+              "type" : "string",
+              "enum" : [ "USER", "DOCTOR", "ADMINISTRATOR" ]
+            }
+          }
+        } ]
+      },
+      "Specialization" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "specialization_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented specialization ID"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Employee" : {
+        "required" : [ "experience", "graduate", "specialization", "user" ],
+        "type" : "object",
+        "properties" : {
+          "employee_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented employee ID"
+          },
+          "user" : {
+            "type" : "integer",
+            "description" : "Foreign key to Users"
+          },
+          "specialization" : {
+            "type" : "integer",
+            "description" : "Foreign key to Specializations"
+          },
+          "graduate" : {
+            "type" : "string"
+          },
+          "experience" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Schedule" : {
+        "required" : [ "date_end", "date_start", "doctor_id", "status" ],
+        "type" : "object",
+        "properties" : {
+          "schedule_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented schedule ID"
+          },
+          "doctor_id" : {
+            "type" : "integer",
+            "description" : "Foreign key to Employees"
+          },
+          "date_start" : {
+            "type" : "string",
+            "description" : "Start date and time of the schedule",
+            "format" : "date-time"
+          },
+          "date_end" : {
+            "type" : "string",
+            "description" : "End date and time of the schedule",
+            "format" : "date-time"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "AVAILABLE", "UNAVAILABLE" ]
+          }
+        }
+      },
+      "Appointment" : {
+        "required" : [ "patient_id", "schedule_id", "status" ],
+        "type" : "object",
+        "properties" : {
+          "appointment_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented appointment ID"
+          },
+          "patient_id" : {
+            "type" : "integer",
+            "description" : "Foreign key to Users"
+          },
+          "schedule_id" : {
+            "type" : "integer",
+            "description" : "Foreign key to Schedule"
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation time of the appointment",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Last updated time of the appointment",
+            "format" : "date-time"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "PLANNED", "CANCELLED", "FINISHED" ]
+          }
+        }
+      },
+      "Review" : {
+        "required" : [ "appointment_id", "comment", "grade" ],
+        "type" : "object",
+        "properties" : {
+          "review_id" : {
+            "type" : "integer",
+            "description" : "Auto-incremented review ID"
+          },
+          "appointment_id" : {
+            "type" : "integer",
+            "description" : "Foreign key to Appointments"
+          },
+          "grade" : {
+            "type" : "integer",
+            "description" : "Grade of the review",
+            "enum" : [ 1, 2, 3, 4, 5 ]
+          },
+          "comment" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation time of the review",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Last updated time of the review",
+            "format" : "date-time"
+          }
+        }
+      },
+      "users_login_body" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
